@@ -12,7 +12,7 @@ class UArrowComponent;
 class USpringArmComponent;
 class UCameraComponent;
 class UFloatingPawnMovement;
-
+class UMyStaticMeshComponent;
 
 UCLASS()
 class L20260410_API AMyPawn : public APawn
@@ -29,10 +29,10 @@ public:
 	TObjectPtr<UStaticMeshComponent> Body;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	TObjectPtr<UStaticMeshComponent> Left;
+	TObjectPtr<UMyStaticMeshComponent> Left;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	TObjectPtr<UStaticMeshComponent> Right;
+	TObjectPtr<UMyStaticMeshComponent> Right;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<UArrowComponent> Arrow;
@@ -45,6 +45,27 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<UFloatingPawnMovement> Movement;
+
+	void Pitch(float value);
+	void Roll(float value);
+
+	void Fire();
+	void Boost();
+	void UnBoost();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Data)
+	float MoveSpeed = 1000.f;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Data)
+	float RotationSpeed = 60.f;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Data)
+	float BoostValue = 0.5f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Data)
+	float PropellerRotationSpeed = 7200.0f;
+
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
